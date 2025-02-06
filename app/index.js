@@ -21,12 +21,12 @@ app.get("/", (req, res) => {
 
 app.post("/api/usuarios", async(req, res) => {
     if (validarEmail(req.body.email)) {
-        emailD = req.body.email;
       try {
         const encryptedData = encryptData(req.body.email);
+        
         const { data, error } = await supabase
           .from('usuarios')
-          .insert([{ email: emailD }])
+          .insert([{ email: encryptedData }])
           .select();
         if (error) throw error;
         return res.status(201).json({ message: 'Datos encriptados insertados correctamente' });
