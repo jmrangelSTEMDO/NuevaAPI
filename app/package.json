@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
+    "crypto-js": "^4.2.0",
     "express": "^4.21.2",
     "nodemon": "^3.1.9",
     "supabase": "^2.9.6"
