@@ -16,6 +16,7 @@ const SECRET_KEY='0U370okyNsPAQ1nMnvy21Mu7MGi/8KbnNu9gfz14IX8=';
 
 var allowedOrigins = [
   'http://localhost:3000',
+
   'http://localhost:4200',
   'http://localhost:4200/inicio',
   'http://localhost:8000',
