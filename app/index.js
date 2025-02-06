@@ -119,4 +119,10 @@ function encryptData(data) {
 function validarEmail(email) {
     return emailRegex.test(email);
   }
-
+  
+  function jsonToCsv(json) {
+    const items = JSON.parse(json);
+    const header = Object.keys(items[0]).join(',');
+    const rows = items.map(item => Object.values(item).join(',')).join('\n');
+    return `${header}\n${rows}`;
+  }
