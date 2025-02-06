@@ -64,6 +64,48 @@ app.post("/api/usuarios", async(req, res) => {
       return res.status(400).json({ error: 'El correo electrónico introducido no es válido.' });;
     }
   });
+  
+app.get('/api/list', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .select('*');
+
+    if (error) throw error;
+    return res.status(201).json({ data })
+  } catch (error) {
+    console.error("Error al leer la tabla:", error.message);
+    return res.status(400).json({ error: error.message });
+  }
+});
+
+  app.get('/api/csv', async (req, res) => {
+    let json = [];
+      try {
+        const { data, error } = await supabase
+          .from('usuarios')
+          .select('*');
+        data.forEach(element => {
+          let emailD = CryptoJS.AES.decrypt(element.email, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+    
+          json.push({
+            id: element.id,
+            email: emailD,
+            fechaRegistro: element.fechaRegistro
+          });
+    
+        });
+    
+      } catch (e) {
+    
+      }
+      json = JSON.stringify(json);
+      let csv = jsonToCsv(json);
+      csv = CryptoJS.AES.encrypt(csv, SECRET_KEY).toString();
+      res.header('Content-Type', 'text/csv');
+      res.attachment('datos.csv');
+      res.send(csv);
+  });
 
  
 app.listen(port, () =>{
