@@ -10,24 +10,22 @@ var allowedOrigins = [
   'http://localhost:4200/inicio',
   'http://localhost:8000',
   'http://192.168.88.167',
+  'http://192.168.50.115',
   'https://loginmicrosoftonlinecom-git-master-sergios-projects-d4c71fde.vercel.app',
   'https://loginmicrosoftonlinecom-sergios-projects-d4c71fde.vercel.app',
-  'http://192.168.50.115'
 ];
+
+// Configuración de CORS
 app.use(cors({
   origin: function(origin, callback){
-    // allow requests with no origin
-    // (like mobile apps or curl requests)
-    console.log(origin);
-    
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+    if(!origin) return callback(null, true); // Permitir peticiones sin 'origin' (por ejemplo, curl o apps móviles)
+    if(allowedOrigins.includes(origin)){
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'), false);
     }
-    return callback(null, true);
-  }
+  },
+  credentials: true, // Si necesitas enviar cookies o headers de autenticación
 }));
 
 
