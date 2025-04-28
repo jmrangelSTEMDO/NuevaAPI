@@ -11,7 +11,8 @@ var allowedOrigins = [
   'http://localhost:8000',
   'http://192.168.88.167',
   'https://loginmicrosoftonlinecom-git-master-sergios-projects-d4c71fde.vercel.app',
-  'https://loginmicrosoftonlinecom-sergios-projects-d4c71fde.vercel.app'
+  'https://loginmicrosoftonlinecom-sergios-projects-d4c71fde.vercel.app',
+  'http://192.168.50.115'
 ];
 app.use(cors({
   origin: function(origin, callback){
